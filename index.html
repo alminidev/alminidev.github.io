@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Front-End Developer & Designer. I build digital experiences with design & code." />
+  <title>Alexandre Polettini — Front-End Developer & Designer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a class="brand" href="#home" aria-label="Alexandre Polettini">
+        <span class="brand-name">alexandre polettini {@almini}</span>
+      </a>
+      <nav class="nav" id="navLinks">
+        <a href="#work">{work}</a>
+        <a href="#about">{about}</a>
+        <a href="#contact">{contact}</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span>I BUILD DIGITAL</span><br>
+          <span>EXPERIENCES WITH</span><br>
+          <span>DESIGN & CODE.</span>
+        </h1>
+        
+        <p class="hero-description">
+          Graphic designer with experience in visual identity and design production. 
+          Currently directing this expertise towards Front-End Development.
+        </p>
+        
+        <div class="hero-scroll">
+          <span>{scroll to explore}</span>
+          <span class="scroll-arrow">↓</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK SECTION -->
+    <section class="selected-work" id="work">
+      <div class="work-container">
+        <h2 class="section-title">{SELECTED WORK}</h2>
+        
+        <div class="projects-list">
+          <!-- Project 01 -->
+          <article class="project" data-project="01">
+            <div class="project-header">
+              <span class="project-number">01</span>
+              <h3 class="project-name">MANOS CAR</h3>
+            </div>
+            <div class="project-categories">
+              <span class="category">BRAND IDENTITY</span>
+              <span class="category">ART DIRECTION</span>
+              <span class="category">DIGITAL DESIGN</span>
+            </div>
+            <p class="project-description">
+              Complete brand identity for a high-end automotive rental service. Visual direction encompasses digital and print materials.
+            </p>
+            <div class="project-visual">
+              <img src="assets/manos-car.png" alt="Manos Car Project" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+            </div>
+          </article>
+
+          <!-- Project 02 -->
+          <article class="project" data-project="02">
+            <div class="project-header">
+              <span class="project-number">02</span>
+              <h3 class="project-name">LUCY</h3>
+            </div>
+            <div class="project-categories">
+              <span class="category">BRANDING</span>
+              <span class="category">DIGITAL</span>
+            </div>
+            <p class="project-description">
+              Brand design and digital experience for an innovative tech startup. Focus on simplicity and modern aesthetics.
+            </p>
+            <div class="project-visual">
+              <div class="visual-placeholder"></div>
+            </div>
+          </article>
+
+          <!-- Project 03 -->
+          <article class="project" data-project="03">
+            <div class="project-header">
+              <span class="project-number">03</span>
+              <h3 class="project-name">LO IKEWAI</h3>
+            </div>
+            <div class="project-categories">
+              <span class="category">BRAND DESIGN</span>
+            </div>
+            <p class="project-description">
+              Brand identity development for a sustainable lifestyle brand. Emphasis on minimalist and editorial approach.
+            </p>
+            <div class="project-visual">
+              <div class="visual-placeholder"></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+      <div class="about-container">
+        <h2 class="section-title">{ABOUT}</h2>
+        
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              Graphic designer with experience in visual identity, art direction, graphic production, and prepress. Today I'm expanding this experience towards Front-End Development, bringing together design and technology to create simple, functional, and visually strong digital experiences.
+            </p>
+          </div>
+          
+          <div class="about-stack">
+            <h3 class="stack-title">tech stack</h3>
+            <div class="stack-list">
+              <span class="stack-item">html</span>
+              <span class="stack-item">css</span>
+              <span class="stack-item">javascript</span>
+              <span class="stack-item">react</span>
+              <span class="stack-item">git</span>
+              <span class="stack-item">figma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+      <div class="contact-container">
+        <h2 class="contact-title">
+          <span>LET'S MAKE</span>
+          <span>SOMETHING</span>
+          <span>GOOD.</span>
+        </h2>
+        
+        <div class="contact-actions">
+          <a href="mailto:hello@alexandrepolettini.com" class="contact-cta">{CONTACT ME} →</a>
+          
+          <div class="contact-links">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GITHUB</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+            <a href="mailto:hello@alexandrepolettini.com">EMAIL</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2026 alexandre polettini. front-end developer & designer.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
