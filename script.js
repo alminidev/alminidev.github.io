@@ -237,6 +237,55 @@
     console.warn(`Imagem ${imgElement.src} não encontrada em ${BASE_PATH}. Verifique se o arquivo PNG transparente foi adicionado.`);
   });
 
+  /* ------------------------------------------------------------------
+     PROXIMITY-BASED GLITCH: ativa somente quando o mouse está
+     próximo ao centro horizontal da imagem (zona de ~35% da largura)
+     ------------------------------------------------------------------ */
+  const heroVisual = wrapper.closest('.hero-visual') || wrapper.parentElement;
+  let rafId = null;
+
+  // Fração da largura do wrapper que define a "zona central" de ativação
+  // 0.35 = o mouse precisa estar dentro de 35% da largura, medido a partir do centro
+  const ACTIVATION_ZONE = 0.35;
+
+  function checkProximity(mouseX, mouseY) {
+    const rect = wrapper.getBoundingClientRect();
+
+    // Centro do wrapper
+    const centerX = rect.left + rect.width / 2;
+
+    // Distância horizontal normalizada (0 = centro, 1 = borda)
+    const distX = Math.abs(mouseX - centerX) / (rect.width / 2);
+
+    // Verifica se o mouse está dentro do bounding vertical do wrapper
+    const insideY = mouseY >= rect.top && mouseY <= rect.bottom;
+
+    // Ativa o glitch somente se está na zona central E dentro da altura
+    const shouldGlitch = insideY && distX <= ACTIVATION_ZONE;
+
+    if (shouldGlitch && !wrapper.classList.contains('is-glitching')) {
+      wrapper.classList.add('is-glitching');
+    } else if (!shouldGlitch && wrapper.classList.contains('is-glitching')) {
+      wrapper.classList.remove('is-glitching');
+    }
+  }
+
+  heroVisual.addEventListener('mousemove', (e) => {
+    if (rafId) return; // throttle via rAF
+    rafId = requestAnimationFrame(() => {
+      checkProximity(e.clientX, e.clientY);
+      rafId = null;
+    });
+  }, { passive: true });
+
+  // Remove o glitch quando o mouse sai da área do hero
+  heroVisual.addEventListener('mouseleave', () => {
+    wrapper.classList.remove('is-glitching');
+  });
+
+  /* ------------------------------------------------------------------
+     CLICK → FLASH + CHARACTER SWAP
+     ------------------------------------------------------------------ */
   wrapper.addEventListener('click', () => {
     if (isSwapping) return; // Evita cliques concorrentes durante o flash
     isSwapping = true;
@@ -263,5 +312,107 @@
     }, 205);
   });
 }());
+
+
+/* ----------------------------------------------------------------
+   WORKS GALLERY LIGHTBOX
+   - Focus management (WCAG)
+   - Click outside & ESC dismissal
+   - Scroll lock
+   ---------------------------------------------------------------- */
+(function initWorksLightbox() {
+  const modal = document.getElementById('works-lightbox');
+  if (!modal) return;
+
+  const overlay = modal.querySelector('.lightbox-overlay');
+  const closeBtn = modal.querySelector('.lightbox-close-btn');
+  const targetImg = document.getElementById('lightbox-active-img');
+  const captionEl = document.getElementById('lightbox-caption');
+  const triggers = document.querySelectorAll('.works-gallery-frame');
+
+  let lastActiveElement = null;
+
+  function openLightbox(trigger) {
+    const img = trigger.querySelector('img');
+    if (!img || !img.getAttribute('src')) return;
+
+    lastActiveElement = trigger;
+
+    // Atualiza imagem e legenda
+    targetImg.src = img.src;
+    targetImg.alt = img.alt || 'Visualização do projeto';
+    captionEl.textContent = img.alt || '';
+
+    // Estado ativo e acessibilidade
+    modal.classList.add('is-active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // Evita scroll de fundo
+
+    // Move foco para o botão fechar
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    if (!modal.classList.contains('is-active')) return;
+
+    modal.classList.remove('is-active');
+    modal.setAttribute('aria-hidden', 'true');
+    targetImg.src = '';
+    targetImg.alt = '';
+    document.body.style.overflow = ''; // Restaura scroll
+
+    // Restaura foco ao elemento disparador
+    if (lastActiveElement) {
+      lastActiveElement.focus();
+      lastActiveElement = null;
+    }
+  }
+
+  // Eventos nos gatilhos da galeria (clique e teclado)
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => openLightbox(trigger));
+
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(trigger);
+      }
+    });
+  });
+
+  // Fechar no botão X
+  closeBtn.addEventListener('click', closeLightbox);
+
+  // Fechar ao clicar fora (no overlay)
+  overlay.addEventListener('click', closeLightbox);
+
+  // Atalhos de teclado (ESC e Focus Trap)
+  window.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('is-active')) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeLightbox();
+    }
+
+    // Trava foco dentro do modal (Tab cycling)
+    if (e.key === 'Tab') {
+      const focusables = modal.querySelectorAll('button:not([disabled])');
+      if (focusables.length === 0) return;
+
+      const firstEl = focusables[0];
+      const lastEl = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      } else if (!e.shiftKey && document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
+      }
+    }
+  });
+})();
+
 
 

@@ -89,8 +89,10 @@
 
         <!-- 01 — Manos Car -->
         <article class="work-card" id="project-manos-car">
-          <div class="work-img-wrap">
-            <img src="00-brief/assets/manos-car.png" alt="Manos Car — brand identity" loading="lazy" class="work-img">
+          <div class="works-gallery-frame" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Ampliar imagem do projeto Mano's Car">
+            <div class="work-img-wrap">
+              <img src="00-brief/assets/manos-car.png" alt="Manos Car — brand identity" loading="lazy" class="work-img works-gallery-target">
+            </div>
           </div>
           <div class="work-info">
             <h3 class="work-title">MANO'S CAR</h3>
@@ -179,6 +181,22 @@
 
   <!-- Notification Toast -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- ======================================================
+       LIGHTBOX MODAL — Works Gallery
+       ====================================================== -->
+  <div id="works-lightbox" class="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Visualização ampliada do projeto">
+    <div class="lightbox-overlay" tabindex="-1"></div>
+    <div class="lightbox-dialog">
+      <button type="button" class="lightbox-close-btn" aria-label="Fechar visualização ampliada (Esc)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <figure class="lightbox-figure">
+        <img src="" alt="" class="lightbox-img" id="lightbox-active-img">
+        <figcaption class="lightbox-caption" id="lightbox-caption" aria-live="polite"></figcaption>
+      </figure>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

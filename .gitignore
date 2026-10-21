@@ -1,4 +1,5 @@
 backup/
+00-brief/assets/IMAGENS ANTIGAS/
 *.tmp
 .DS_Store
 Thumbs.db
