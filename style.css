@@ -219,8 +219,7 @@ a {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%) scale(1.5);
-  transform-origin: bottom center;
+  transform: translateX(-50%);
   height: clamp(55vh, 78vh, 88vh);
   width: auto;
   z-index: 2;
@@ -309,8 +308,7 @@ a {
   position: absolute;
   bottom: 1.5rem;
   left: 50%;
-  transform: translateX(-50%) translateY(6px) scale(0.67);
-  transform-origin: center center;
+  transform: translateX(-50%) translateY(6px);
   pointer-events: none;
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -331,7 +329,7 @@ a {
 
 .hero-photo-wrapper.is-glitching .transform-hint {
   opacity: 1;
-  transform: translateX(-50%) translateY(0) scale(0.67);
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Flash Esfumaçado no Clique (Smoke & Flare Light Burst) */
@@ -444,12 +442,12 @@ a {
 @keyframes heroPhotoEntrance {
   0% {
     opacity: 0;
-    transform: translateX(-50%) translateY(28px) scale(1.45);
+    transform: translateX(-50%) translateY(28px) scale(0.97);
   }
 
   100% {
     opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1.5);
+    transform: translateX(-50%) translateY(0) scale(1);
   }
 }
 
